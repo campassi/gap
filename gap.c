@@ -16,15 +16,15 @@ int input()
 	// input/output file pointer
 	FILE *ifp, *tfp, *ofp;
 	// read in binary mode
-	if(!(ifp = fopen ("input.json", "rb")))
+	if(!(ifp = fopen ("summary.json", "rb")))
 	{
-		printf("input.json does not exist\n");
+		printf("summary.json does not exist\n");
 		fclose(ifp);
 		return 1;
 	}
 	else
 	{
-		printf("input.json successfully opened\n");
+		printf("summary.json successfully opened\n");
 	}
 
 	// write in binary mode
@@ -41,7 +41,7 @@ int input()
 	
 	// read in one character at a time from input.json
 	int c, prev=0;
-	printf("being reading input file, searching <0x20\n");
+	printf("begin reading input file, searching <0x20\n");
 	while((c = fgetc(ifp)) != EOF)
 	{
 		// to remove chinese & funky characters change this to
@@ -62,11 +62,11 @@ int input()
 	printf("characters <0x20 removed\n");
 	if(!fclose(ifp))
 	{
-		printf("input file successfully closed\n");
+		printf("summary file successfully closed\n");
 	}
 	else
 	{
-		printf("input file closure failure\n");
+		printf("summary file closure failure\n");
 	}
 	if(!fclose(tfp))
 	{
