@@ -46,7 +46,9 @@ int input()
 	{
 		// to remove chinese & funky characters change this to
 		// if(c < 0x20 || c > 0x7e)
-		if(c < 0x20)
+		// this line is the pre-filter
+		// 20171201 also add remove backslashes 0x5c
+		if(c < 0x20 || c > 0x7e || c == 0x5c)
 		{
 			if(c == 0xa /*\n*/)
 			{
