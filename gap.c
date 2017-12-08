@@ -56,6 +56,22 @@ int input()
 				continue;
 			}
 		}
+                else if(c == 0x5c /*\*/)
+                {
+			//I don't know why 0x5c72 "\r" is gumming up the works but this will fix it
+                        int next = fgetc(ifp);
+                        if(next == 0x72 /*r*/)
+                        {
+                                //found a \r
+                                continue;
+                        }
+                        else
+                        {
+				// only a single \ was found so write both to tmp file
+                                fputc(c, tfp);
+                                fputc(next, tfp);
+                        }
+                }
 		else
 		{
 			fputc(c, tfp);
