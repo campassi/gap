@@ -62,7 +62,7 @@ int input()
                         int next = fgetc(ifp);
                         if(next == 0x72 /*r*/)
                         {
-                                //found a \r
+                                //found a \r so don't write any of this to tmp file
                                 continue;
                         }
                         else
