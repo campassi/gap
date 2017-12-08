@@ -9,6 +9,10 @@
 #include<fcntl.h>
 #include<unistd.h>
 
+#define INPUT "summary.json"
+#define TEMP "temp.json"
+#define OUTPUT "output.json"
+
 int input()
 {
 	// need to read in large blocks for speed enhancement
@@ -16,32 +20,32 @@ int input()
 	// input/output file pointer
 	FILE *ifp, *tfp, *ofp;
 	// read in binary mode
-	if(!(ifp = fopen ("summary.json", "rb")))
+	if(!(ifp = fopen (INPUT, "rb")))
 	{
-		printf("summary.json does not exist\n");
+		printf("INPUT does not exist\n");
 		fclose(ifp);
 		return 1;
 	}
 	else
 	{
-		printf("summary.json successfully opened\n");
+		printf("INPUT successfully opened\n");
 	}
 
 	// write in binary mode
-	if(!(tfp = fopen ("temp.json", "wb")))
+	if(!(tfp = fopen (TEMP, "wb")))
 	{
-		printf("cannot create temp.json\n");
+		printf("cannot create TEMP\n");
 		fclose(tfp);
 		return 2;
 	}
 	else
 	{
-		printf("temp.json successfully opened\n");
+		printf("TEMP successfully opened\n");
 	}
 	
 	// read in one character at a time from input.json
 	int c, prev=0;
-	printf("begin reading input file, searching <0x20\n");
+	printf("begin reading INPUT, searching <0x20\n");
 	while((c = fgetc(ifp)) != EOF)
 	{
 		// to remove chinese & funky characters change this to
@@ -80,39 +84,39 @@ int input()
 	printf("characters <0x20 removed\n");
 	if(!fclose(ifp))
 	{
-		printf("summary file successfully closed\n");
+		printf("INPUT successfully closed\n");
 	}
 	else
 	{
-		printf("summary file closure failure\n");
+		printf("INPUT closure failure\n");
 	}
 	if(!fclose(tfp))
 	{
-		printf("temp file successfully closed\n");
+		printf("TEMP successfully closed\n");
 	}
 	else
 	{
-		printf("temp file closure failure\n");
+		printf("TEMP closure failure\n");
 	}
-	if(!(tfp = fopen ("temp.json", "rb")))
+	if(!(tfp = fopen (TEMP, "rb")))
 	{
-		printf("temp.json does not exist\n");
+		printf("TEMP does not exist\n");
 		fclose(tfp);
 		return 1;
 	}
 	else
 	{
-		printf("temp file successfully reopened, file pointer reset\n");
+		printf("TEMP successfully reopened, file pointer reset\n");
 	}
-	if(!(ofp = fopen ("output.json", "wb")))
+	if(!(ofp = fopen (OUTPUT, "wb")))
 	{
-		printf("cannot create output.json\n");
+		printf("cannot create OUTPUT\n");
 		fclose(ofp);
 		return 2;
 	}
 	else
 	{
-		printf("output.json successfully opened\n");
+		printf("OUTPUT successfully opened\n");
 	}
 	prev=0;
 	printf("remove newlines unless after }\n");
@@ -138,19 +142,19 @@ int input()
 	printf("newlines removed\n");
         if(!fclose(tfp))
         {
-                printf("temp file successfully closed\n");
+                printf("TEMP successfully closed\n");
         }
         else
         {
-                printf("temp file closure failure\n");
+                printf("TEMP closure failure\n");
         }
         if(!fclose(ofp))
         {
-                printf("output file successfully closed\n");
+                printf("OUTPUT successfully closed\n");
         }
         else
         {
-                printf("output file closure failure\n");
+                printf("OUTPUT closure failure\n");
         }
 
 
